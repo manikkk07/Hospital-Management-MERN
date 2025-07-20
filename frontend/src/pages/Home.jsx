@@ -16,6 +16,7 @@ import ServiceList from '../components/Services/ServiceList';
 import DoctorList from '../components/Doctors/DoctorList';
 import FaqList from '../components/Faq/FaqList';
 import Testimonial from '../components/Testimonial/Testimonial';
+import Services from './Services';
 
 const Home = () => {
   return <>
@@ -246,7 +247,7 @@ const Home = () => {
           <Testimonial/>
       </div>
    </section>
-   {/* «««««« testimonial end »»»»»» */}
+   {/* «««««« testimonial end »»»»»» */}   
   </>
 };
 
