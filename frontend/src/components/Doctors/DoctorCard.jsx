@@ -10,8 +10,7 @@ const DoctorCard = ({ doctor }) => {
         totalRating,
         photo,
         specialization,
-        totalPatients,
-        hospital
+        experiences
     } = doctor;
 
     return (
@@ -39,11 +38,11 @@ const DoctorCard = ({ doctor }) => {
 
             <div className="mt-[18px] lg:mt-5 flex items-center justify-between">
                 <div>
-                    <h3 className="text-[16px] leading-7 lg:text-[18px] lg:leading-[30px] font-semibold text-heading">+{totalPatients} patients</h3>
-                    <p className="text-[14px] leading-6 font-[400] text-text">At {hospital}</p>
+                    {/* <h3 className="text-[16px] leading-7 lg:text-[18px] lg:leading-[30px] font-semibold text-heading">+{totalPatients} patients</h3> */}
+                    <p className="text-[14px] leading-6 font-[400] text-text">At {experiences && experiences[0]?.hospital}</p>
                 </div>
 
-                <Link to='/doctors' className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] flex items-center justify-center group hover:bg-primary hover:border-none">
+                <Link to={`/doctors/${doctor._id}`} className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] flex items-center justify-center group hover:bg-primary hover:border-none">
                     <BsArrowRight className="group-hover:text-white w-6 h-5" />
                 </Link>
 

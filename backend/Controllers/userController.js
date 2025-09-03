@@ -1,18 +1,35 @@
 import User from "../models/UserSchema.js";
 import Booking from "../models/BookingSchema.js";
 import Doctor from "../models/DoctorSchema.js";
+import bcrypt from "bcryptjs";
 
-export const updateUser = async (req,res)=>{
-    const id = req.params.id
+export const updateUser = async (req, res) => {
+  const id = req.params.id;
 
-    try{
-        const updatedUser = await User.findByIdAndUpdate(id, {$set:req.body}, {new:true})
+  try {
+    const updateData = { ...req.body };
 
-        res.status(200).json({success:true, message:"Successfully updated", data: updatedUser})
-    } catch (err) {
-        res.status(500).json({success:false, message:"Failed to update" });  
+    // If password is included, hash it before saving
+    if (updateData.password) {
+      const salt = await bcrypt.genSalt(10);
+      updateData.password = await bcrypt.hash(updateData.password, salt);
     }
-}
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { $set: updateData },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Successfully updated",
+      data: updatedUser,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to update" });
+  }
+};
 
 export const deleteUser = async (req,res)=>{
     const id = req.params.id
