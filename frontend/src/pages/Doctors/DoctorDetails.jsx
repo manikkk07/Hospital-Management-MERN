@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import starIcon from "../../assets/images/Star.png";
+
 import DoctorAbout from './DoctorAbout';
 import Feedback from './Feedback';
 import SidePanel from './SidePanel';
@@ -49,7 +49,7 @@ const DoctorDetails = () => {
               <h3 className='text-heading text-[22px] leading-9 mt-3 font-bold'>{name}</h3>
               <div className='flex items-center gap-[6px]'>
                 <span className='flex items-center gap-[6px] text-[14px] leading-5 lg:text-[16px] lg:leading-7 font-semibold text-heading'>
-                  <img src={starIcon} alt="" />{averageRating}
+                  <img src="/images/Star.png" alt="" />{averageRating}
                 </span>
                 <span className='text-[14px] leading-5 lg:text-[16px] lg:leading-7 font-[400] text-text'>({totalRating})</span>
               </div>

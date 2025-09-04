@@ -24,19 +24,24 @@ const Login = () => {
     event.preventDefault();
     setLoading(true)
 
+    console.log('Login attempt with:', formData);
+    console.log('BASE_URL:', BASE_URL);
+
     try {
       const res = await fetch(`${BASE_URL}/auth/login`, {
-        method: 'post',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
       })
 
+      console.log('Response status:', res.status);
       const result = await res.json()
+      console.log('Response data:', result);
 
       if (!res.ok) {
-        throw new Error(result.message)
+        throw new Error(result.message || 'Login failed')
       }
 
       dispatch({

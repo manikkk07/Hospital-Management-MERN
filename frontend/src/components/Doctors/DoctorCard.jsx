@@ -1,5 +1,5 @@
 import React from 'react'
-import starIcon from "../../assets/images/Star.png";
+
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 
@@ -28,7 +28,7 @@ const DoctorCard = ({ doctor }) => {
                 </span>
 
                 <div className="flex items-center gap-[6px]">
-                    <span className="flex items-center gap-[6px] text-[14px] leading-6 lg:text-[16px] lg:leading-7 font-semibold text-heading"><img src={starIcon} alt="" />
+                    <span className="flex items-center gap-[6px] text-[14px] leading-6 lg:text-[16px] lg:leading-7 font-semibold text-heading"><img src="/images/Star.png" alt="" />
                         {avgRating}
                     </span>
                     <span className="leading-6 lg:text-[16px] lg:leading-7 font-[400] text-text">({totalRating})</span>

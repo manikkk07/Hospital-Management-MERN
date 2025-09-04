@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import signupImg from "../assets/images/signup.gif";
+
 import { Link, useNavigate } from 'react-router-dom';
 import uploadImageToCloudinary from '../utils/uploadCloudinary.js';
 import { BASE_URL } from '../config.js';
@@ -75,7 +75,7 @@ const Signup = () => {
         {/* «««««« img box »»»»»» */}
         <div className='hidden lg:block bg-primary rounded-l-lg'>
           <figure className='rounded-l-lg'>
-            <img src={signupImg} alt="" className='w-full rounded-l-lg' />
+            <img src="/images/signup.gif" alt="" className='w-full rounded-l-lg' />
           </figure>
         </div>
 

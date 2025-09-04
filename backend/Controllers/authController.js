@@ -62,31 +62,8 @@ export const login = async (req, res) => {
     }
 
     console.log("User found, checking password...");
-    let isPasswordMatch = false;
-    
-    try {
-      // First try bcrypt compare (for hashed passwords)
-      isPasswordMatch = await bcrypt.compare(password, user.password);
-      console.log("Bcrypt compare result:", isPasswordMatch);
-    } catch (error) {
-      console.log("Bcrypt compare failed, trying plain text:", error.message);
-      // If bcrypt fails, try plain text comparison
-      if (password === user.password) {
-        isPasswordMatch = true;
-        console.log("Plain text password matched, hashing for future...");
-        // Hash the password for future logins
-        user.password = await bcrypt.hash(password, 12);
-        await user.save();
-      }
-    }
-    
-    // If bcrypt didn't match, also try plain text as fallback
-    if (!isPasswordMatch && password === user.password) {
-      isPasswordMatch = true;
-      console.log("Plain text fallback matched, hashing for future...");
-      user.password = await bcrypt.hash(password, 12);
-      await user.save();
-    }
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    console.log("Password match result:", isPasswordMatch);
 
     if (!isPasswordMatch) {
       console.log("Password mismatch for:", email);

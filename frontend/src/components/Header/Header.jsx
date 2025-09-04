@@ -1,5 +1,5 @@
 import { useEffect, useRef, useContext } from 'react';
-import logo from '../../assets/images/logo.png';
+
 import { NavLink, Link } from 'react-router-dom';
 import { BiMenu } from "react-icons/bi";
 import { authContext } from '../../context/AuthContext.jsx';
@@ -52,7 +52,7 @@ const Header = () => {
       <div className="flex items-center justify-between">
         {/* «««««« logo »»»»»  */}
         <div>
-          <img src={logo} alt="" />
+          <img src="/images/logo.png" alt="" />
         </div>
 
 

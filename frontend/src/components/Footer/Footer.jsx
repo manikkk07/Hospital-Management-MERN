@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import logo from '../../assets/images/logo.png'
+
 import { RiLinkedinFill } from 'react-icons/ri'
 import { AiFillYoutube, AiFillGithub, AiOutlineInstagram } from 'react-icons/ai'
 
@@ -79,7 +79,7 @@ const Footer = () => {
     <div className="container">
       <div className="flex justify-between flex-col md:flex-row flex-wrap gap-[30px]">
         <div>
-          <img src={logo} alt="" />
+          <img src="/images/logo.png" alt="" />
           <p className="text-[16px] leading-7 font-[400] text-text mt-4">Copyright © {year} developed by Manik Yadav all rights reserved.</p>
 
           <div className="flex items-center gap-3 mt-4">

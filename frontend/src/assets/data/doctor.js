@@ -1,6 +1,4 @@
-import doctorImg01 from "../images/doctor-img01.png";
-import doctorImg02 from "../images/doctor-img02.png";
-import doctorImg03 from "../images/doctor-img03.png";
+
 
 export const doctors = [
   {
@@ -9,7 +7,7 @@ export const doctors = [
     specialization: "Surgeon",
     avgRating: 4.8,
     totalRating: 272,
-    photo: doctorImg01,
+    photo: "/images/doctor-img01.png",
     totalPatients: 1500,
     hospital: "Mount Adora Hospital, Los Angeles.",
   },
@@ -19,7 +17,7 @@ export const doctors = [
     specialization: "Neurologist",
     avgRating: 4.8,
     totalRating: 272,
-    photo: doctorImg02,
+    photo: "/images/doctor-img02.png",
     totalPatients: 1500,
     hospital: "Mount Adora Hospital, Los Angeles.",
   },
@@ -29,7 +27,7 @@ export const doctors = [
     specialization: "Dermatologist",
     avgRating: 4.8,
     totalRating: 272,
-    photo: doctorImg03,
+    photo: "/images/doctor-img03.png",
     totalPatients: 1500,
     hospital: "Mount Adora Hospital, Los Angeles.",
   },
