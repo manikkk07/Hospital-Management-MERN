@@ -48,18 +48,52 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    console.log("Login attempt for:", email);
+    
+    if (!email || !password) {
+      return res.status(400).json({ success: false, message: "Email and password are required" });
+    }
+
     let user = await User.findOne({ email }) || await Doctor.findOne({ email });
 
     if (!user) {
+      console.log("User not found:", email);
       return res.status(404).json({ success: false, message: "User not found" });
     }
 
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    console.log("User found, checking password...");
+    let isPasswordMatch = false;
+    
+    try {
+      // First try bcrypt compare (for hashed passwords)
+      isPasswordMatch = await bcrypt.compare(password, user.password);
+      console.log("Bcrypt compare result:", isPasswordMatch);
+    } catch (error) {
+      console.log("Bcrypt compare failed, trying plain text:", error.message);
+      // If bcrypt fails, try plain text comparison
+      if (password === user.password) {
+        isPasswordMatch = true;
+        console.log("Plain text password matched, hashing for future...");
+        // Hash the password for future logins
+        user.password = await bcrypt.hash(password, 12);
+        await user.save();
+      }
+    }
+    
+    // If bcrypt didn't match, also try plain text as fallback
+    if (!isPasswordMatch && password === user.password) {
+      isPasswordMatch = true;
+      console.log("Plain text fallback matched, hashing for future...");
+      user.password = await bcrypt.hash(password, 12);
+      await user.save();
+    }
 
     if (!isPasswordMatch) {
+      console.log("Password mismatch for:", email);
       return res.status(400).json({ success: false, message: "Invalid credentials" });
     }
 
+    console.log("Login successful for:", email);
     const token = generateToken(user);
 
     const { password: userPassword, appointments, ...rest } = user._doc;
