@@ -14,15 +14,22 @@ const Profile = ({ user }) => {
     name: '',
     email: '',
     password: '',
-    photo: null,
+    photo: '',
     gender: '',
-    bloodType: "",
+    bloodType: '',
   });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    setFormData({ name: user.name, email: user.email, photo: user.photo, gender: user.gender, bloodType: user.bloodType, password: '' });
+    setFormData({ 
+      name: user?.name || '', 
+      email: user?.email || '', 
+      photo: user?.photo || '', 
+      gender: user?.gender || '', 
+      bloodType: user?.bloodType || '', 
+      password: '' 
+    });
   }, [user]);
 
   const handleInputChange = e => {
