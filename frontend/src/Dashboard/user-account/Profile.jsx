@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import uploadImageToCloudinary from '../../utils/uploadCloudinary.js';
-import { BASE_URL, token } from '../../config.js';
+import { BASE_URL } from '../../config.js';
 import { toast } from 'react-toastify';
 import HashLoader from 'react-spinners/HashLoader';
 
@@ -51,13 +51,21 @@ const Profile = ({ user }) => {
     setLoading(true)
 
     try {
+      const token = localStorage.getItem('token');
+      
+      // Remove password from formData if it's empty
+      const updateData = { ...formData };
+      if (!updateData.password || updateData.password.trim() === '') {
+        delete updateData.password;
+      }
+      
       const res = await fetch(`${BASE_URL}/users/${user._id}`, {
         method: "put",
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(updateData)
       })
 
       const { message } = await res.json()
@@ -96,7 +104,7 @@ const Profile = ({ user }) => {
           />
         </div>
         <div className="mb-5">
-          <input type="password" placeholder="password" name="password" value={formData.password}
+          <input type="password" placeholder="Enter new password (leave blank to keep current)" name="password" value={formData.password}
             onChange={handleInputChange}
             className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primary text-[16px] leading-7 text-heading placeholder:text-text cursor-pointer"
           />
