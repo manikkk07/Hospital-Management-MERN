@@ -1,6 +1,27 @@
 import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { authContext } from "../context/AuthContext";
 
 const CheckoutSuccess = () => {
+    const { dispatch } = useContext(authContext);
+
+    useEffect(() => {
+        // Restore authentication state from localStorage after payment redirect
+        const user = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
+        if (user && token && role) {
+            dispatch({
+                type: "LOGIN_SUCCESS",
+                payload: {
+                    user: JSON.parse(user),
+                    token: token,
+                    role: role,
+                },
+            });
+        }
+    }, [dispatch]);
     return (
         <div className="bg-gray-100 h-screen">
             <div className="bg-white p-6 md:mx-auto">
